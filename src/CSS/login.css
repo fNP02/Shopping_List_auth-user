@@ -1,0 +1,122 @@
+.login-container {
+  /* background-color: #fff;
+  box-shadow: 4px 4px 10px #6a6a6a; */
+  /* border: 1px solid red; */
+  /* border-radius: 8px; */
+  /* height: 30em; */
+  width: 30em;
+  margin: 4em auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+
+  & .errorLog {
+    /* border: 1px solid red; */
+    box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.2);
+    height: 2em;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    background-color: rgba(255, 0, 0, 0.2);
+  }
+  & h1 {
+    color: #555;
+  }
+  & .form {
+    /* border: 1px solid red; */
+
+    background-color: #fff;
+    box-shadow: 4px 4px 10px #6a6a6a;
+    border-radius: 8px;
+    padding: 1em;
+
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    /* margin: 2em 4em; */
+    justify-content: space-around;
+    & label {
+      color: #6a6a6a;
+      font-size: 0.8em;
+    }
+    & input {
+      width: 90%;
+      margin: 0 auto;
+      border: none;
+      box-shadow: 1px 1px 3px #6a6a6a;
+      height: 3em;
+      padding-left: 20px;
+      border-radius: 5px;
+      margin-bottom: 2em;
+      margin-top: 0.8em;
+      font-size: 1em;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        box-shadow: 2px 2px 10px #6a6a6a;
+      }
+      &:hover {
+        box-shadow: 2px 2px 10px#6a6a6a;
+        transition: all 0.2s;
+      }
+    }
+    & .submit-button {
+      width: 80%;
+      margin: 0 auto;
+      height: 3em;
+      background-color: #cfcfcf;
+      box-shadow: 1px 1px 3px#6a6a6a;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.2s;
+      font-weight: bold;
+
+      &:hover {
+        background-color: #6a6a6a;
+        color: #cfcfcf;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+    }
+  }
+
+  & .form-type{
+    background-color: aquamarine;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+  }
+  & .Auth-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em 0;
+    & .google-btn {
+      border: none;
+      box-shadow: 1px 1px 3px#6a6a6a;
+      background-color: #cfcfcf;
+      border-radius: 5px;
+      height: 3em;
+      padding: 0 2em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1em;
+      &:hover {
+        background-color: #6a6a6a;
+        color: #cfcfcf;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+    }
+  }
+}
