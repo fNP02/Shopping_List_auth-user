@@ -13,13 +13,15 @@ export const Login = () => {
     email: "",
     password: "",
   });
+  const [rol, setRol] = useState("");
 
   const [signIn, setSignIn] = useState(true);
 
   const {
     currentUser,
-    login,
-    logout,
+    logIn,
+    signUp,
+    logOut,
     errorMessage,
     setErrorMessage,
     loginWithGoogle,
@@ -39,9 +41,17 @@ export const Login = () => {
     navigate("/");
   };
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(user.email, user.password, onSuccessfulLogin);
+
+    if (signIn) {
+      //login
+      await logIn(user.email, user.password, onSuccessfulLogin);
+    } else {
+      //sign up
+      await signUp(user.email, user.password, rol, onSuccessfulLogin);
+      console.log("usted se esta registrando");
+    }
   };
 
   const handleGoogleLogin = async () => {
@@ -56,17 +66,17 @@ export const Login = () => {
           <p>{errorMessage}</p>
         </div>
       )}
-      <form className="form" onSubmit={handleLogin}>
-        <label htmlFor="email">Email</label>
+      <form className="form" onSubmit={handleSubmit}>
+        <label htmlFor="email">Email *</label>
         <input
           id="email"
           name="email"
-          type="email"
+          type="text"
           value={user.email}
           placeholder="email"
           onChange={handleChange}
         />
-        <label htmlFor="password"> Password</label>
+        <label htmlFor="password"> Password *</label>
         <input
           id="password"
           name="password"
@@ -75,22 +85,55 @@ export const Login = () => {
           placeholder="password"
           onChange={handleChange}
         />
-        <button className="submit-button" type="submit">
+        {!signIn && (
+          <>
+            <label htmlFor="rol"> Rol *</label>
+            <select
+              name=""
+              id=""
+              defaultValue={"default"}
+              onChange={(e) => setRol(e.target.value)}
+            >
+              <option value="default" disabled>
+                Select a Rol
+              </option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </>
+        )}
+        <button
+          className="submit-button"
+          type="submit"
+          disabled={!signIn && rol == ""}
+        >
           {signIn ? "Login" : "Register"}
         </button>
       </form>
       <div className="form-type">
-        <p>{signIn?"Don't have an account?":'Do you already have an account?'}</p>
-        <button onClick={()=>setSignIn(!signIn)}>{signIn?'Sign Up':'Sign In'}</button>
+        <p>
+          {signIn
+            ? "Don't have an account?"
+            : "Do you already have an account?"}
+        </p>
+        <button
+          onClick={() => {
+            setSignIn(!signIn);
+            setErrorMessage("");
+          }}
+        >
+          {console.log(rol)}
+          {signIn ? "Sign Up" : "Sign In"}
+        </button>
       </div>
-        <div className="Auth-div">
-          <p>Or</p>
-          <button className="google-btn" onClick={handleGoogleLogin}>
-            <i className="fa-brands fa-google"></i>
-            <p>{`${signIn?'Sign In':'Sign Up'} with Google`}</p>
-          </button>
-        </div>
-      {currentUser && <button onClick={() => logout()}>Logout</button>}
+      <div className="Auth-div">
+        <p>Or</p>
+        <button className="google-btn" onClick={handleGoogleLogin}>
+          <i className="fa-brands fa-google"></i>
+          <p>{`${signIn ? "Sign In" : "Sign Up"} with Google`}</p>
+        </button>
+      </div>
+      {currentUser && <button onClick={() => logOut()}>Logout</button>}
     </div>
   );
 };

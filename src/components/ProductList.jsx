@@ -14,12 +14,18 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+
 import { db } from "../firebaseConfig/firebase";
 import { Link } from "react-router-dom";
+import { UserInfo } from "./userInfo";
+
+import { useAuth } from "../store/UserAuth";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
   const productsCollection = collection(db, "products");
+
+  const { logOut } = useAuth();
 
   const getProducts = async () => {
     const data = await getDocs(productsCollection);
@@ -58,8 +64,12 @@ export const ProductList = () => {
 
   return (
     <div className="container-div">
+      <UserInfo />
       <div className="headers">
-        <h1>Products List</h1>
+        <div>
+          <h1>Products List</h1>
+          <button onClick={() => logOut()}>Log Out</button>
+        </div>
         <Link className="btn btt" to="/create-new-product">
           + New Product
         </Link>
