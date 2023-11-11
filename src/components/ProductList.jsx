@@ -66,10 +66,7 @@ export const ProductList = () => {
     <div className="container-div">
       <UserInfo />
       <div className="headers">
-        <div>
           <h1>Products List</h1>
-          <button onClick={() => logOut()}>Log Out</button>
-        </div>
         <Link className="btn btt" to="/create-new-product">
           + New Product
         </Link>
@@ -77,11 +74,10 @@ export const ProductList = () => {
       <table>
         <thead>
           <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Comentario</th>
-            <th>Editar</th>
-            <th></th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Comment</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>

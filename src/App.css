@@ -1,7 +1,12 @@
 @import '/src/CSS/login.css';
+@import '/src/CSS/productList.css';
+@import '/src/CSS/productForm.css';
+@import '/src/CSS/userInfo.css';
 
 body{
   background-color: #DDD;
+  color: rgba(0, 0, 0, 0.7);
+
   height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
 }

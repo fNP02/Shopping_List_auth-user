@@ -23,9 +23,7 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setCurrentUser(currentUser);
-
       const getPermissions = async () => {
         const docRef = doc(db, `users/${currentUser?.uid}`);
         const info = await getDoc(docRef);
@@ -38,7 +36,6 @@ function App() {
     });
   }, []);
 
-  console.log(currentUser);
 
   if (loading) return <h1>Loading...</h1>;
 

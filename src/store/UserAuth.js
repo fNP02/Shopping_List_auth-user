@@ -14,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 export const useAuth = create((set) => ({
   currentUser: [],
   currentUserPermissions: [],
-  errorCode: [],
-  errorMessage: [],
+  errorCode: "",
+  errorMessage: "",
 
   setErrorMessage: (message) => {
     set({ errorMessage: message });
@@ -36,7 +36,6 @@ export const useAuth = create((set) => ({
         // Signed in
         const user = userCredential.user;
         set({ currentUser: user });
-        console.log(user);
         onSuccess && onSuccess();
         // navigate("/");
       })
@@ -55,11 +54,10 @@ export const useAuth = create((set) => ({
         // Signed in
         const user = userCredential.user;
         set({ currentUser: user });
-        console.log(user);
-        console.log(user.uid);
 
         //---------create object in db with user rol
         const userDocRef = doc(db, `users/${user.uid}`); //as template string
+
         const infoToAdd = {
           email: email,
           rol: rol,
@@ -80,8 +78,17 @@ export const useAuth = create((set) => ({
   loginWithGoogle: (onSuccess) => {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
-      .then(() => {
-        // Sign-out successful.
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        set({ currentUser: user });
+        //---------create object in db with user rol
+        const userDocRef = doc(db, `users/${user.uid}`); //as template string
+        const rol = "user";
+        const infoToAdd = {
+          email: user.email,
+          rol: rol,
+        };
+        await setDoc(userDocRef, infoToAdd); //if doc does not yet exist, it'll be created
         console.log("singin google successful");
         onSuccess && onSuccess();
       })
@@ -89,6 +96,7 @@ export const useAuth = create((set) => ({
         // An error happened.
         console.log("error happened in login google");
         set({ errorCode: error.code, errorMessage: error.message });
+        console.log(error.message);
       });
   },
 

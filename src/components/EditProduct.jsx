@@ -40,11 +40,11 @@ export const EditProduct = () => {
     };
     await updateDoc(product, newData);
     navigate("/");
-  };
+  }; 
 
   return (
-    <div className="container-list">
-      <h1>Create new Product</h1>
+    <div className="container-div">
+      <h1>Edit Product</h1>
       <form onSubmit={handleSubmit} className="create-form">
         <div>
           <label> Title</label>

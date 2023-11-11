@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"; //cuando estado de autenticacion cambia
 import { auth } from "../../firebaseConfig/firebase";
 
+import { firebaseErrors } from "../../firebaseConfig/firebaseErrors";
+
 export const Login = () => {
   const [user, setUser] = useState({
     email: "",
@@ -23,21 +25,20 @@ export const Login = () => {
     signUp,
     logOut,
     errorMessage,
+    errorCode,
     setErrorMessage,
     loginWithGoogle,
   } = useAuth();
 
-  // const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
     setErrorMessage("");
-    console.log(name, value);
     setUser({ ...user, [name]: value }); //spread para guardar todos los datos que tenga y luego actualizar
   };
 
   const onSuccessfulLogin = () => {
-    console.log("okkk el login");
+    console.log("login ok");
     navigate("/");
   };
 
@@ -58,12 +59,13 @@ export const Login = () => {
     await loginWithGoogle(onSuccessfulLogin);
   };
 
+  const errorDisp = firebaseErrors(errorCode);
   return (
     <div className="login-container">
       <h1>{signIn ? "Sign In" : "Sign Up"}</h1>
       {errorMessage && (
         <div className="errorLog">
-          <p>{errorMessage}</p>
+          <p>{errorDisp}</p>
         </div>
       )}
       <form className="form" onSubmit={handleSubmit}>
@@ -122,7 +124,6 @@ export const Login = () => {
             setErrorMessage("");
           }}
         >
-          {console.log(rol)}
           {signIn ? "Sign Up" : "Sign In"}
         </button>
       </div>
@@ -130,7 +131,7 @@ export const Login = () => {
         <p>Or</p>
         <button className="google-btn" onClick={handleGoogleLogin}>
           <i className="fa-brands fa-google"></i>
-          <p>{`${signIn ? "Sign In" : "Sign Up"} with Google`}</p>
+          <p>Sign In with Google (as user)</p>
         </button>
       </div>
       {currentUser && <button onClick={() => logOut()}>Logout</button>}

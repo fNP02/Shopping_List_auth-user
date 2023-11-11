@@ -1,0 +1,28 @@
+.create-form{
+    display: flex;
+    flex-direction: column;
+   gap: 10px;
+    & div{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      & label{
+        flex: 1 0 120px;
+        /* padding: 0 10px; */
+        /* width: 200px; */
+      }
+      & input{
+        flex: 1 0 140px;
+        font-size: 1em;
+        height: 1.8em;
+        width: 250px;
+      }
+    }
+    .gr {
+        background-color: rgb(177, 255, 177);
+      }
+      .cancel {
+        background-color: rgb(255, 177, 177);
+      }
+  }
+  
