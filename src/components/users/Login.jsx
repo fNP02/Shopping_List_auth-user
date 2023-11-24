@@ -134,7 +134,6 @@ export const Login = () => {
           <p>Sign In with Google (as user)</p>
         </button>
       </div>
-      {currentUser && <button onClick={() => logOut()}>Logout</button>}
     </div>
   );
 };

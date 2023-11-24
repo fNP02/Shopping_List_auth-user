@@ -17,7 +17,7 @@ import {
 
 import { db } from "../firebaseConfig/firebase";
 import { Link } from "react-router-dom";
-import { UserInfo } from "./userInfo";
+import { UserInfo } from "./UserInfo";
 
 import { useAuth } from "../store/UserAuth";
 
